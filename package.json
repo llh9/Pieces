@@ -2,7 +2,7 @@
   "name": "pieces",
   "version": "1.0.0",
   "description": "PWA for a Fine Artist",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack",
