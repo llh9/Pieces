@@ -1,0 +1,22 @@
+{
+  "name": "pieces",
+  "version": "1.0.0",
+  "description": "PWA for a Fine Artist",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/llh9/Pieces.git"
+  },
+  "keywords": [
+    "Artwork"
+  ],
+  "author": "Landon Hinkle Jr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/llh9/Pieces/issues"
+  },
+  "homepage": "https://github.com/llh9/Pieces#readme"
+}
