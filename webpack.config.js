@@ -16,9 +16,9 @@ const config = {
     new WebpackPwaManifest({
       fingerprints: false,
       inject: false,
-      name: "Images App",
-      short_name: "Images App",
-      description: "An application for images",
+      name: "all things milli",
+      short_name: "Painter App",
+      description: "An application for a Painting Artist",
       background_color: "#01579b",
       theme_color: "#ffffff",
       start_url: "/",

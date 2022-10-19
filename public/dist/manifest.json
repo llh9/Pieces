@@ -31,12 +31,12 @@
       "type": "image/png"
     }
   ],
-  "name": "Images App",
-  "short_name": "Images App",
+  "name": "all things milli",
+  "short_name": "Painter App",
   "orientation": "portrait",
   "display": "standalone",
   "start_url": "/",
-  "description": "An application for images",
+  "description": "An application for a Painting Artist",
   "background_color": "#01579b",
   "theme_color": "#ffffff"
 }

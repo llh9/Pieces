@@ -1,3 +1,6 @@
+// service worker is javascript file that run every time.It keeps running even you close the browser.Due to this we can send push notification,offline mode.
+
+// Decalre array of files to cache 
 const FILES_TO_CACHE = [
   "/",
   "/home",
@@ -36,9 +39,11 @@ const FILES_TO_CACHE = [
   "/assets/images/Milli-Video.mp4"
 ];
 
+//Declare cache names
 const STATIC_CACHE = "static-cache-v1";
 const RUNTIME_CACHE = "runtime-cache";
 
+//Once Service-Worker "install" is called, first open the static cache and store all files in the FILES_TO_CACHE Variable
 self.addEventListener("install", event => {
   event.waitUntil(
     caches
@@ -71,11 +76,17 @@ self.addEventListener("activate", event => {
   );
 });
 
+
+//Intercept appropriate requests and allow others to be handled normaly
 self.addEventListener("fetch", event => {
   // non GET requests are not cached and requests to other origins are not cached
-  if (
+  if(
     event.request.method !== "GET" ||
-    !event.request.url.startsWith(self.location.origin)
+    !event.request.url.startsWith(self.location.origin) ||
+    event.request.url.includes("/login") ||
+    event.request.url.includes("/logout") ||
+    event.request.url.includes("/callback") ||
+    event.request.url.includes("/https://dev-txg650li.us.auth0.com/") 
   ) {
     event.respondWith(fetch(event.request));
     return;
@@ -85,13 +96,31 @@ self.addEventListener("fetch", event => {
   if (event.request.url.includes("/api/images")) {
     // make network request and fallback to cache if network request fails (offline)
     event.respondWith(
-      caches.open(RUNTIME_CACHE).then(cache => {
+      caches.open(RUNTIME_CACHE)
+      .then(cache => {
         return fetch(event.request)
-          .then(response => {
-            cache.put(event.request, response.clone());
-            return response;
-          })
-          .catch(() => caches.match(event.request));
+        .then(response => {
+          cache.put(event.request, response.clone());
+          return response;
+        })
+        .catch(() => caches.match(event.request));
+      })
+    );
+    return;
+  }
+
+  // handle runtime GET requests for data from /api routes
+  if (event.request.url.includes("/api/images")) {
+    // make network request and fallback to cache if network request fails (offline)
+    event.respondWith(
+      caches.open(RUNTIME_CACHE)
+      .then(cache => {
+        return fetch(event.request)
+        .then(response => {
+          cache.put(event.request, response.clone());
+          return response;
+        })
+        .catch(() => caches.match(event.request));
       })
     );
     return;
