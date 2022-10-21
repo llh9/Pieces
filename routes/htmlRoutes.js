@@ -17,7 +17,7 @@ module.exports = function(app) {
 
   // req.isAuthenticated is provided from the auth router
   app.get('/', (req, res) => {
-    res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+    res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out', );
   });
   
   app.get("/images/:id", requiresAuth(), function(req, res) {
@@ -32,7 +32,15 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/home.html"));
   });
 
-  app.get("*", requiresAuth(), function(req, res) {
+  app.get("/success", requiresAuth(), function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/success.html"));
+  });
+
+  app.get("/cancel", requiresAuth(), function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/cancel.html"));
+  });
+
+  app.get("/", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/index.html"));
   });
 
